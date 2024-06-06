@@ -1,0 +1,28 @@
+.root{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .smile{
+        font-size: 60px;
+    }
+    .img{
+        width: 50%;
+        height: 50%;
+        margin: 40px;
+    }
+    .button{
+        color: white;
+        background-color: #232323;
+        font-size: 18px;
+        font-weight: 600;
+        margin: 0 auto;
+        padding: 12px 0 14px;
+        width: 230px;
+        border-radius: 30px;
+        &:hover{
+            background-color: #363636;
+        }
+    }
+}
