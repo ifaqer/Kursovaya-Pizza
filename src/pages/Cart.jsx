@@ -36,13 +36,16 @@ const Cart = ({buyCount, setBuyCount, buySumma, setBuySumma, addToCartTovar, set
                 </div>
                 <div class="cart__item-info">
                   <h3>{item.title}</h3>
-                  <p>тонкое тесто, 26 см.</p>
+                  <p>добавлено в корзину</p>
                 </div>
                 <div class="cart__item-price">
                   <b>{item.price} ₽</b>
                 </div>
                 <div class="cart__item-remove" onClick={()=>{
-                  setAddToCartTovar(addToCartTovar.filter((itemDelete)=>itemDelete!=item))
+                  console.log('Res = ', addToCartTovar.indexOf(item))
+                  console.log('Arr = ', addToCartTovar)
+                  delete addToCartTovar[addToCartTovar.indexOf(item)]
+                  setAddToCartTovar(addToCartTovar)
                   setBuyCount((prev)=>prev-1)
                   setBuySumma((prev)=>prev-item.price)
                 }}>

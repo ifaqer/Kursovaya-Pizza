@@ -37,7 +37,7 @@ export default function PizzaBlock({obj, id, imageUrl, title, types, sizes, pric
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add" onClick={()=>setCount((prev)=>prev+1)}>
+                <div className="button button--outline button--add" onClick={()=>{setCount((prev)=>prev+1), addToCart()}}>
                 <svg
                     width="12"
                     height="12"
@@ -50,7 +50,7 @@ export default function PizzaBlock({obj, id, imageUrl, title, types, sizes, pric
                     fill="white"
                     />
                 </svg>
-                <span onClick={()=>addToCart()}>Добавить</span>
+                <span>Добавить</span>
                 <i>{count}</i>
                 </div>
             </div>
