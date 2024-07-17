@@ -6,6 +6,24 @@ body {
   background-color: $background;
 }
 
+.wrapperedit{
+  display: flex;
+  justify-content: space-between;
+  margin: 18px;
+  h2{
+    margin: 0;
+  }
+  .editlogo {
+    cursor: pointer;
+      width: 25px;
+      height: 25px;
+      &:hover{
+        width: 27px;
+        height: 27px;
+      }
+    }
+}
+
 .NewsContent{
   @media(max-width: 642px){
     display: none;

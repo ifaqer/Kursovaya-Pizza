@@ -7,6 +7,8 @@ import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 
+import editlogo from "../assets/img/edit-icon.png"
+
 export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
     const [enterCategories, setEnterCategories] = React.useState(0)
     const [enterSorted, setEnterSorted] = React.useState('rating')
@@ -28,7 +30,10 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
         <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
         <Sorted setEnterSorted={setEnterSorted}/>
     </div>
-    <h2 className="content__title">Все пиццы</h2>
+    <div className='wrapperedit'>
+        <h2 className="content__title">Все пиццы</h2>
+        <img src={editlogo} className="editlogo" alt="edit-logo" />
+    </div>
     <div className="content__items">
     {
         isLoading ? [...new Array(8)].map((_, index)=><Skeleton key={index}/>) :
