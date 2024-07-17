@@ -12,10 +12,8 @@ export default function PizzaBlock({editDialog, setPizzas, pizzas, obj, id, imag
         console.log(addToCartTovar)
     }
     const deleteItem = () => {
-        //let deleteItems = pizzas.filter((element)=>element != obj)
-        // setPizzas(deleteItems)
-        console.log(id)
-        Axios.delete(`https://65db02b53ea883a15290ffe7.mockapi.io/items/:${id}`)
+        Axios.delete(`https://65db02b53ea883a15290ffe7.mockapi.io/items/${obj.id}`)
+        setPizzas(pizzas.filter((element)=>element != obj))
     }
     return(
         <div className="pizza-block-wrapper">

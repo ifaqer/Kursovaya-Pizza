@@ -3,14 +3,16 @@
     .backgroundEdit {
             position: absolute;
             width: 100%;
-            min-height: 265vh;
-            // Не удается растянуть на высоту нормально( Приходится так!
+            min-height: 300vw;
             top: 0;
             left: 0;
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 1;
         }
     .windowEdit{
+        div{
+            margin: 5px;
+        }
         h3{
             background-color: white;
             border-radius: 10px;
@@ -24,6 +26,7 @@
                 text-decoration: underline;
             }
         }
+        width: 50%;
         margin: 100px auto 0;
         padding: 10px;
         height: auto;

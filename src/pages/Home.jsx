@@ -9,6 +9,7 @@ import EditDialog from '../components/EditDialog'
 
 import editlogo from "../assets/img/edit-icon.png"
 import cancelLogo from "../assets/img/cancelEdit.png"
+import plus from "../assets/img/plus.png"
 
 export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
     const [enterCategories, setEnterCategories] = React.useState(0)
@@ -16,6 +17,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [editDialog, setEditDialog] = React.useState(false)
+    const [clickAdd, setClickAdd] = React.useState(false)
     React.useEffect(()=>{
         setIsLoading(true)
         Axios.get(`https://65db02b53ea883a15290ffe7.mockapi.io/items` +
@@ -27,6 +29,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted])
   return (
     <>
+    {clickAdd && <EditDialog setClickAdd={setClickAdd}/>}
     <div className="content__top">
         <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
         <Sorted setEnterSorted={setEnterSorted}/>
@@ -42,6 +45,13 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
             <PizzaBlock {...obj} obj={obj} key={obj.id} pizzas={pizzas} setPizzas={setPizzas} editDialog={editDialog} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
         )))
     }
+    {editDialog && <div className="block-added" onClick={()=>{
+        setClickAdd(true)
+        window.scrollTo(0, 0)
+    }}>
+    <img src={plus} alt="added" />
+    <p>Добавить товар</p> 
+    </div>}
     </div>
     </>
   )

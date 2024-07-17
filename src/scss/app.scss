@@ -6,6 +6,33 @@ body {
   background-color: $background;
 }
 
+.block-added{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 425px;
+  img{
+    width: 100px;
+    margin: 10px;
+    &:hover{
+      width: 110px;
+    }
+  }
+
+  p{
+    color: #9f9f9f;
+  }
+  box-shadow: 3, 3, #6d6d6d;
+  border: 1px solid #e6e6e6;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 18px;
+  text-align: center;
+  
+}
+
 .wrapperedit{
   display: flex;
   justify-content: space-between;
