@@ -5,6 +5,42 @@
   text-align: center;
   margin-bottom: 65px;
 
+  .edit{
+    position: relative;
+    .editTrue {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      p{
+        cursor: pointer;
+        width: 30;
+        display: inline;
+        padding: 7px;
+        margin: 5px;
+        background-color: white;
+        border-radius: 8px;
+        &.green{
+          color: white;
+          background-color: rgb(10, 159, 10);
+          &:hover {
+              font-weight: 500;
+            }
+        }
+        &.red {
+          color: white;
+          background-color: rgb(213, 0, 0);
+          &:hover {
+              font-weight: bold;
+            }
+        }
+      }
+      }
+
+  }
+
   &-wrapper{
     display: flex;
     justify-content: center;
@@ -12,6 +48,7 @@
 
   &__image {
     width: 260px;
+    z-index: 9;
   }
 
   &__title {

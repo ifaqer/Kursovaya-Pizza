@@ -8,6 +8,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton'
 import EditDialog from '../components/EditDialog'
 
 import editlogo from "../assets/img/edit-icon.png"
+import cancelLogo from "../assets/img/cancelEdit.png"
 
 export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
     const [enterCategories, setEnterCategories] = React.useState(0)
@@ -26,20 +27,19 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted])
   return (
     <>
-    {editDialog && <EditDialog pizzas={pizzas} setPizzas={setPizzas} setEditDialog={setEditDialog}/>}
     <div className="content__top">
         <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
         <Sorted setEnterSorted={setEnterSorted}/>
     </div>
     <div className='wrapperedit'>
         <h2 className="content__title">Все пиццы</h2>
-        {!isLoading && <img src={editlogo} className="editlogo" alt="edit-logo" onClick={()=>setEditDialog(true)}/>}
+        {!isLoading && <img src={!editDialog ? editlogo : cancelLogo} className="editlogo" alt="edit-logo" onClick={()=>setEditDialog((prev)=>!prev)}/>}
     </div>
     <div className="content__items">
     {
         isLoading ? [...new Array(8)].map((_, index)=><Skeleton key={index}/>) :
         (pizzas.map((obj, index)=>(
-            <PizzaBlock {...obj} obj={obj} key={obj.id} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
+            <PizzaBlock {...obj} obj={obj} key={obj.id} pizzas={pizzas} setPizzas={setPizzas} editDialog={editDialog} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
         )))
     }
     </div>

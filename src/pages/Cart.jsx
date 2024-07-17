@@ -42,8 +42,6 @@ const Cart = ({buyCount, setBuyCount, buySumma, setBuySumma, addToCartTovar, set
                   <b>{item.price} ₽</b>
                 </div>
                 <div class="cart__item-remove" onClick={()=>{
-                  console.log('Res = ', addToCartTovar.indexOf(item))
-                  console.log('Arr = ', addToCartTovar)
                   delete addToCartTovar[addToCartTovar.indexOf(item)]
                   setAddToCartTovar(addToCartTovar)
                   setBuyCount((prev)=>prev-1)

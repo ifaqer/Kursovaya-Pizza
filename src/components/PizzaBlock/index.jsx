@@ -1,6 +1,7 @@
 import React from "react"
+import Axios from "axios"
 
-export default function PizzaBlock({obj, id, imageUrl, title, types, sizes, price, setBuyCount, setBuySumma, addToCartTovar, setAddToCartTovar}){
+export default function PizzaBlock({editDialog, setPizzas, pizzas, obj, id, imageUrl, title, types, sizes, price, setBuyCount, setBuySumma, addToCartTovar, setAddToCartTovar}){
     const [count, setCount] = React.useState(0)
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
@@ -10,10 +11,23 @@ export default function PizzaBlock({obj, id, imageUrl, title, types, sizes, pric
         setAddToCartTovar((prev)=>[...prev, obj])
         console.log(addToCartTovar)
     }
+    const deleteItem = () => {
+        //let deleteItems = pizzas.filter((element)=>element != obj)
+        // setPizzas(deleteItems)
+        console.log(id)
+        Axios.delete(`https://65db02b53ea883a15290ffe7.mockapi.io/items/:${id}`)
+    }
     return(
         <div className="pizza-block-wrapper">
             <div className="pizza-block">
+            <div className="edit">
+            {editDialog &&
+            <div className="editTrue">
+                <p className="green">Редактировать</p>
+                <p className="red" onClick={deleteItem}>Удалить</p>
+            </div>}
             <img className="pizza-block__image" src={imageUrl} alt="Pizza"/>
+            </div>
             <h4 className="pizza-block__title">{title}</h4>
             <div className="pizza-block__selector">
                 <ul>{types.map((type, index)=>(
