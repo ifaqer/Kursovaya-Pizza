@@ -6,8 +6,7 @@ export default function Categories({enterCategories, setEnterCategories}){
     "Мясные",
     "Вегетарианская",
     "Гриль",
-    "Острые",
-    "Закрытые"
+    "Острые"
   ]
     return(
         <div className="categories">

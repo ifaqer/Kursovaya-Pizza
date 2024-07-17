@@ -23,12 +23,6 @@ body {
       }
     }
 }
-
-.NewsContent{
-  @media(max-width: 642px){
-    display: none;
-  }
-}
 .wrapper {
   width: calc(100vw - 80px);
   height: 100%;
