@@ -1,7 +1,8 @@
 import React from 'react'
+import Axios from 'axios'
 import styles from './styles.module.scss'
 
-function EditDialog ({setClickAdd}){
+function EditDialog ({setClickAdd, setPizzas}){
   const title = React.useRef()
   const url = React.useRef()
   const price = React.useRef()
@@ -60,17 +61,19 @@ function EditDialog ({setClickAdd}){
                     sizes: [],
                     rating: 0, // новенький, еще не популярный!
                   }
-                  if (size26) newItem.sizes.push('26')
-                  if (size30) newItem.sizes.push('30')
-                  if (size40) newItem.sizes.push('40')
-                  if (tonkoe.current.value && tradic.current.value){
+                  if (size26.current.checked) newItem.sizes.push('26')
+                  if (size30.current.checked) newItem.sizes.push('30')
+                  if (size40.current.checked) newItem.sizes.push('40')
+                  if (tonkoe.current.checked && tradic.current.checked){
                     newItem.types = [0, 1] }
-                  else if (tonkoe.current.value && !tradic.current.value){
+                  else if (tonkoe.current.checked && !tradic.current.checked){
                     newItem.types = [0] }
-                  else if (!tonkoe.current.value && tradic.current.value){
+                  else if (!tonkoe.current.checked && tradic.current.checked){
                     newItem.types = [1] }
-                  console.log(newItem)
                   console.log(JSON.stringify(newItem))
+                  Axios.post("https://65db02b53ea883a15290ffe7.mockapi.io/items", newItem)
+                  setPizzas((prev)=>[...prev, newItem])
+                  setClickAdd(false)
                   }}>Добавить новый продукт</h3>
               </div>
             </form>

@@ -29,7 +29,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted])
   return (
     <>
-    {clickAdd && <EditDialog setClickAdd={setClickAdd}/>}
+    {clickAdd && <EditDialog setPizzas={setPizzas} setClickAdd={setClickAdd}/>}
     <div className="content__top">
         <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
         <Sorted setEnterSorted={setEnterSorted}/>
