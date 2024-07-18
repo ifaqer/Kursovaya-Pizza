@@ -6,6 +6,22 @@ body {
   background-color: $background;
 }
 
+.baseEdit{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  p{
+    &:hover{
+      font-weight: 600;
+    }
+    cursor: pointer;
+    background-color:#fe4b1e;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+}
 .block-added{
   display: flex;
   align-items: center;

@@ -16,6 +16,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     const [enterCategories, setEnterCategories] = React.useState(0)
     const [enterSorted, setEnterSorted] = React.useState('rating')
     const [pizzas, setPizzas] = React.useState([])
+    const [defaultItems, setDefaultItems] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [editDialog, setEditDialog] = React.useState(false)
     const [edit, setEdit] = React.useState(false)
@@ -29,6 +30,9 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
             setPizzas(obj.data)
             setIsLoading(false)
         })
+        Axios.get('https://65db02b53ea883a15290ffe7.mockapi.io/default-product').then((obj)=>{
+            setDefaultItems(obj.data)
+        })
     }, [enterCategories, enterSorted])
   return (
     <>
@@ -40,7 +44,22 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     </div>
     <div className='wrapperedit'>
         <h2 className="content__title">Все пиццы</h2>
-        {!isLoading && <img src={!editDialog ? editlogo : cancelLogo} className="editlogo" alt="edit-logo" onClick={()=>setEditDialog((prev)=>!prev)}/>}
+        <div className='baseEdit'>
+            {editDialog && <p onClick={()=>{
+                let a = confirm('Вернуть стандартные данные в БД?')
+                if(a == true){
+                    pizzas.map((obj)=>{
+                        Axios.delete(`https://65db02b53ea883a15290ffe7.mockapi.io/items/${obj.id}`)
+                    })
+                    defaultItems.map((obj)=>{
+                        Axios.post("https://65db02b53ea883a15290ffe7.mockapi.io/items", obj)
+                    })
+                    setPizzas(defaultItems)
+                    console.log('Вернули!')
+                }
+            }}>Вернуть данные</p>}
+            {!isLoading && <img src={!editDialog ? editlogo : cancelLogo} className="editlogo" alt="edit-logo" onClick={()=>setEditDialog((prev)=>!prev)}/>}
+        </div>
     </div>
     <div className="content__items">
     {
