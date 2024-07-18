@@ -21,7 +21,7 @@ function EditDialog ({setClickAdd, setPizzas}){
               <input required ref={title} type="text" id="title" name="title"/>
               </div>
               <div>
-              <label from="url">URL картинка: </label>
+              <label from="url">URL картинка (240x240 рекомендуется): </label>
               <input ref={url} required type="url" id="url" name="imageUrl"/>
               </div>
               <div>
@@ -54,10 +54,15 @@ function EditDialog ({setClickAdd, setPizzas}){
               </div>
               <div>
                 <h3 onClick={()=>{
+                  if((!size26.current.checked &&
+                    !size30.current.checked &&
+                    !size40.current.checked) || (!tonkoe.current.checked && !tradic.current.checked)){
+                      alert('Выбор размера и типа ОБЯЗАТЕЛЬНО!')
+                  } else {
                   let newItem = {
                     imageUrl: url.current.value,
                     title: title.current.value,
-                    price: price.current.value,
+                    price: Number(price.current.value),
                     sizes: [],
                     rating: 0, // новенький, еще не популярный!
                   }
@@ -70,10 +75,9 @@ function EditDialog ({setClickAdd, setPizzas}){
                     newItem.types = [0] }
                   else if (!tonkoe.current.checked && tradic.current.checked){
                     newItem.types = [1] }
-                  console.log(JSON.stringify(newItem))
                   Axios.post("https://65db02b53ea883a15290ffe7.mockapi.io/items", newItem)
                   setPizzas((prev)=>[...prev, newItem])
-                  setClickAdd(false)
+                  setClickAdd(false)}
                   }}>Добавить новый продукт</h3>
               </div>
             </form>

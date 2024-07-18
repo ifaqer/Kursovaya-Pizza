@@ -6,6 +6,7 @@ import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 import EditDialog from '../components/EditDialog'
+import Edit from '../components/Edit'
 
 import editlogo from "../assets/img/edit-icon.png"
 import cancelLogo from "../assets/img/cancelEdit.png"
@@ -17,6 +18,8 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [editDialog, setEditDialog] = React.useState(false)
+    const [edit, setEdit] = React.useState(false)
+    const [editObject, setEditObject] = React.useState({})
     const [clickAdd, setClickAdd] = React.useState(false)
     React.useEffect(()=>{
         setIsLoading(true)
@@ -29,6 +32,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted])
   return (
     <>
+    {edit && <Edit setEdit={setEdit} editObject={editObject}/>}
     {clickAdd && <EditDialog setPizzas={setPizzas} setClickAdd={setClickAdd}/>}
     <div className="content__top">
         <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
@@ -42,7 +46,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     {
         isLoading ? [...new Array(8)].map((_, index)=><Skeleton key={index}/>) :
         (pizzas.map((obj, index)=>(
-            <PizzaBlock {...obj} obj={obj} key={obj.id} pizzas={pizzas} setPizzas={setPizzas} editDialog={editDialog} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
+            <PizzaBlock {...obj} setEditObject={setEditObject} obj={obj} key={obj.id} clickAdd={clickAdd} edit={edit} setEdit={setEdit} setClickAdd={setClickAdd} pizzas={pizzas} setPizzas={setPizzas} editDialog={editDialog} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
         )))
     }
     {editDialog && <div className="block-added" onClick={()=>{
