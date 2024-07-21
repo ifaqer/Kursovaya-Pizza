@@ -32,7 +32,7 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     <div className='wrapperedit'>
         {search ? <h2 className="content__title">Поиск по запросу: {search}</h2> : <h2 className="content__title">Все пиццы</h2>}
         <div className='baseEdit'>
-            <Search setSearch={setSearch}/>
+            <Search search={search} setSearch={setSearch}/>
         </div>
     </div>
     <div className="content__items">
