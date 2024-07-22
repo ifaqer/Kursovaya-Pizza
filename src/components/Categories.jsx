@@ -5,9 +5,6 @@ import { setCategoryId } from '../redux/slices/filterSlice'
 export default function Categories(){
   const enterCategories = useSelector(state=>state.filterSlice.categoryId)
   const dispatch = useDispatch()
-  const setEnterCategories = (id) => {
-    dispatch(setCategoryId(id))
-  }
   const categories = [
     "Все",
     "Мясные",
@@ -21,7 +18,7 @@ export default function Categories(){
             {categories.map((title, index)=>(
               <li key={index}
                   onClick={()=>{
-                    setEnterCategories(index)
+                    dispatch(setCategoryId(index))
                   }}
                   className={enterCategories == index ? "active" : ''}>
                   {title}
