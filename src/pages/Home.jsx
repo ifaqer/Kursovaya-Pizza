@@ -1,7 +1,9 @@
 import React from 'react'
 import Axios from "axios"
-
-import { useSelector } from 'react-redux'
+import qs from 'qs'
+import { useNavigate } from 'react-router-dom'
+import { setFiltersUrl } from '../redux/slices/filterSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Search from '../components/Search'
 import Sorted from '../components/Sorted'
@@ -14,11 +16,24 @@ export const MyContext = React.createContext()
 export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
     const enterSorted = useSelector(state=>state.filterSlice.sortId)
     const enterCategories = useSelector(state=>state.filterSlice.categoryId)
-    
-    const [search, setSearch] = React.useState('')
+    const search = useSelector(state=>state.filterSlice.search)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
-
+    React.useEffect(()=>{
+        if(window.location.search != ''){
+            const params = qs.parse(window.location.search.substring(1))
+            dispatch(setFiltersUrl(params))
+        }
+    }, [])
+    React.useEffect(()=>{
+        const queryString = qs.stringify({
+            category: enterCategories,
+            enterSorted
+        })
+        navigate(`?${queryString}`)
+    }, [enterCategories, enterSorted, search])
     React.useEffect(()=>{
         setIsLoading(true)
         Axios.get(`https://65db02b53ea883a15290ffe7.mockapi.io/items` +
@@ -27,10 +42,10 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
             setPizzas(obj.data)
             setIsLoading(false)
         })
-    }, [enterCategories, enterSorted])
+    }, [enterCategories, enterSorted, search])
   return (
     <>
-    <MyContext.Provider value={{search, setSearch, setPizzas, addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}}>
+    <MyContext.Provider value={{setPizzas, addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}}>
     <div className="content__top">
         <Categories/>
         <Sorted/>

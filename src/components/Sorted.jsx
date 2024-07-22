@@ -1,8 +1,10 @@
 import React from "react"
-import { useDispatch } from 'react-redux'
 import { setSortId } from '../redux/slices/filterSlice'
+import { useSelector, useDispatch } from "react-redux"
 
 export default function Sorted(){
+
+    const enterSorted = useSelector(state=>state.filterSlice.sortId)
     const [open, setOpen] = React.useState(false)
     const list = [
         {name: "популярности", sortProperty: "rating"},
@@ -32,7 +34,7 @@ export default function Sorted(){
                 />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={()=>setOpen(!open)}>{categories}</span>
+                <span onClick={()=>setOpen(!open)}>{list.filter(item=>item.sortProperty == enterSorted)[0].name}</span>
             </div>
             {open && <div className="sort__popup">
                 <ul>
