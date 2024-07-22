@@ -1,16 +1,21 @@
 import React from 'react'
 import Axios from "axios"
 
+import { useSelector } from 'react-redux'
+
 import Search from '../components/Search'
 import Sorted from '../components/Sorted'
 import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 
+export const MyContext = React.createContext()
+
 export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
+    const enterSorted = useSelector(state=>state.filterSlice.sortId)
+    const enterCategories = useSelector(state=>state.filterSlice.categoryId)
+    
     const [search, setSearch] = React.useState('')
-    const [enterCategories, setEnterCategories] = React.useState(0)
-    const [enterSorted, setEnterSorted] = React.useState('rating')
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
 
@@ -25,24 +30,26 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted])
   return (
     <>
+    <MyContext.Provider value={{search, setSearch, setPizzas, addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}}>
     <div className="content__top">
-        <Categories enterCategories={enterCategories} setEnterCategories={setEnterCategories}/>
-        <Sorted setEnterSorted={setEnterSorted}/>
+        <Categories/>
+        <Sorted/>
     </div>
     <div className='wrapperedit'>
         {search ? <h2 className="content__title">Поиск по запросу: {search}</h2> : <h2 className="content__title">Все пиццы</h2>}
         <div className='baseEdit'>
-            <Search search={search} setSearch={setSearch}/>
+            <Search/>
         </div>
     </div>
     <div className="content__items">
     {
         isLoading ? [...new Array(8)].map((_, index)=><Skeleton key={index}/>) :
         (pizzas.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase())).map((obj, index)=>(
-        <PizzaBlock {...obj} obj={obj} key={index} setPizzas={setPizzas} addToCartTovar={addToCartTovar} setAddToCartTovar={setAddToCartTovar} buyCount={buyCount} setBuyCount={setBuyCount} setBuySumma={setBuySumma} buySumma={buySumma}/>
+        <PizzaBlock {...obj} obj={obj} key={index}/>
         )))
     }
     </div>
+    </MyContext.Provider>
     </>
   )
 }

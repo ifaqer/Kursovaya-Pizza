@@ -1,7 +1,12 @@
 import React from 'react'
 import styles from "./Search.module.scss"
+import {MyContext} from '../../pages/Home.jsx'
 
-export default function Search({setSearch, search}){
+
+export default function Search(){
+
+  const {setSearch, search} = React.useContext(MyContext)
+
   return (
     <>
     {search && (

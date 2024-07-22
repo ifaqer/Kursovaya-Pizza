@@ -1,7 +1,9 @@
 import React from "react"
 import Axios from "axios"
+import {MyContext} from '../../pages/Home.jsx'
 
-export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, price, setBuyCount, setBuySumma, setAddToCartTovar}){
+export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, price}){
+    const {setAddToCartTovar, setBuyCount, setBuySumma} = React.useContext(MyContext)
     const [count, setCount] = React.useState(0)
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
