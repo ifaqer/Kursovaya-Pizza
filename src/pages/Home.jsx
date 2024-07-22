@@ -21,18 +21,22 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     const dispatch = useDispatch()
     const [pizzas, setPizzas] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(true)
+    const [firstRender, setFirstRender] = React.useState(false)
     React.useEffect(()=>{
-        if(window.location.search != ''){
+        if(window.location.search){
             const params = qs.parse(window.location.search.substring(1))
             dispatch(setFiltersUrl(params))
         }
     }, [])
     React.useEffect(()=>{
-        const queryString = qs.stringify({
+        if(firstRender){
+            const queryString = qs.stringify({
             category: enterCategories,
             enterSorted
         })
         navigate(`?${queryString}`)
+        }
+        setFirstRender(true)
     }, [enterCategories, enterSorted, search])
     React.useEffect(()=>{
         setIsLoading(true)
