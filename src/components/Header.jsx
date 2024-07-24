@@ -1,7 +1,9 @@
 import logo from "/img/pizza-logo.svg"
 import {Link} from "react-router-dom"
+import { useSelector } from "react-redux"
 
-export default function Header({buyCount, buySumma}){
+export default function Header(){
+    const {totalPrice, countItems} = useSelector(state=>state.cart)
     return(
         <div className="header">
         <div className="container">
@@ -17,7 +19,7 @@ export default function Header({buyCount, buySumma}){
           <Link to="/cart">
           <div className="header__cart">
             <a href="/cart.html" className="button button--cart">
-              <span>{buySumma} ₽</span>
+              <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -48,7 +50,7 @@ export default function Header({buyCount, buySumma}){
                   strokeLinejoin="round"
                 />
               </svg>
-              <span>{buyCount}</span>
+              <span>{countItems}</span>
             </a>
           </div>
           </Link>

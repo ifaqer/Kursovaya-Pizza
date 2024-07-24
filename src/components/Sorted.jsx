@@ -3,7 +3,6 @@ import { setSortId } from '../redux/slices/filterSlice'
 import { useSelector, useDispatch } from "react-redux"
 
 export default function Sorted(){
-
     const enterSorted = useSelector(state=>state.filterSlice.sortId)
     const [open, setOpen] = React.useState(false)
     const list = [

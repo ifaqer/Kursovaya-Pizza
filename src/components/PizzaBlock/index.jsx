@@ -1,16 +1,23 @@
 import React from "react"
-import Axios from "axios"
-import {MyContext} from '../../pages/Home.jsx'
+import { useSelector, useDispatch } from "react-redux"
+import { addItem, removeItem, clearItems } from "../../redux/slices/cartSlice"
 
 export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, price}){
-    const {setAddToCartTovar, setBuyCount, setBuySumma} = React.useContext(MyContext)
-    const [count, setCount] = React.useState(0)
+    const dispatch = useDispatch()
+    const findItem = useSelector(state=>state.cart.items.find(obj=>obj.id == id))
+    const count = findItem ? findItem.count : 0
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
     const addToCart = ()=>{
-        setBuyCount((prev)=>prev+1)
-        setBuySumma((prev)=>prev+price)
-        setAddToCartTovar((prev)=>[...prev, obj])
+        const newItem = {
+            id,
+            imageUrl,
+            title,
+            type: activeType,
+            size: activeSize,
+            price
+        }
+        dispatch(addItem(newItem))
     }
     return(
         <div className="pizza-block-wrapper">
@@ -41,7 +48,7 @@ export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, pri
             </div>
             <div className="pizza-block__bottom">
                 <div className="pizza-block__price">от {price} ₽</div>
-                <div className="button button--outline button--add" onClick={()=>{setCount((prev)=>prev+1), addToCart()}}>
+                <div className="button button--outline button--add" onClick={addToCart}>
                 <svg
                     width="12"
                     height="12"
@@ -55,7 +62,7 @@ export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, pri
                     />
                 </svg>
                 <span>Добавить</span>
-                <i>{count}</i>
+                {findItem && (<i>{count}</i>)}
                 </div>
             </div>
         </div>
