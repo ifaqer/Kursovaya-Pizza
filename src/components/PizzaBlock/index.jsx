@@ -1,13 +1,14 @@
 import React from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { addItem, removeItem, clearItems } from "../../redux/slices/cartSlice"
+import { addItem } from "../../redux/slices/cartSlice"
 
 export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, price}){
     const dispatch = useDispatch()
-    const findItem = useSelector(state=>state.cart.items.find(obj=>obj.id == id))
-    const count = findItem ? findItem.count : 0
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
+    const findItem1 = useSelector(state=>state.cart.items.find(obj=>(obj.id == id && obj.type == activeType)))
+    const findItem2 = useSelector(state=>state.cart.items.find(obj=>(obj.id == id && obj.type != activeType)))
+    const count = (findItem1 ? findItem1.count : 0)+(findItem2 ? findItem2.count : 0)
     const addToCart = ()=>{
         const newItem = {
             id,
@@ -62,7 +63,7 @@ export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, pri
                     />
                 </svg>
                 <span>Добавить</span>
-                {findItem && (<i>{count}</i>)}
+                {(findItem1 || findItem2) && (<i>{count}</i>)}
                 </div>
             </div>
         </div>
