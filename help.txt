@@ -7,3 +7,9 @@
 // npm i lodash.debounce - импорт только debounce из библиотеки!
 // useCallback - как useEffect, но возвращает значение, а эффекты только выполняют! Это хук-функция!
 // qs — это популярный пакет npm, который используется для сериализации объектов JavaScript в строки запроса
+----------------
+useLocation
+useParams
+Outlet
+const navigate = useNavigate()
+----------------

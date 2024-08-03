@@ -13,7 +13,7 @@ import Skeleton from '../components/PizzaBlock/Skeleton'
 
 export const MyContext = React.createContext()
 
-function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
+function Home(){
 
     const enterSorted = useSelector(state=>state.filterSlice.sortId)
     const enterCategories = useSelector(state=>state.filterSlice.categoryId)
@@ -57,7 +57,6 @@ function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuyS
     }, [enterCategories, enterSorted, search])
   return (
     <>
-    <MyContext.Provider value={{setPizzas, addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}}>
     <div className="content__top">
         <Categories/>
         <Sorted/>
@@ -76,7 +75,6 @@ function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuyS
         )))
     }
     </div>
-    </MyContext.Provider>
     </>
   )
 }
