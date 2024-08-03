@@ -3,7 +3,6 @@ import {Link} from "react-router-dom"
 import EmptyCart from '../components/EmptyCart'
 import {useDispatch, useSelector} from "react-redux"
 import { plusItem, minusItem, removeItem, clearItems } from '../redux/slices/cartSlice' 
-
 const Cart = () => {
   const dispatch = useDispatch()
   const {totalPrice, countItems, items} = useSelector(state=>state.cart)

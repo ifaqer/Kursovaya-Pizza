@@ -13,7 +13,8 @@ import Skeleton from '../components/PizzaBlock/Skeleton'
 
 export const MyContext = React.createContext()
 
-export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
+function Home({addToCartTovar, setAddToCartTovar, buyCount, setBuyCount, setBuySumma, buySumma}){
+
     const enterSorted = useSelector(state=>state.filterSlice.sortId)
     const enterCategories = useSelector(state=>state.filterSlice.categoryId)
     const search = useSelector(state=>state.filterSlice.search)
@@ -40,12 +41,19 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     }, [enterCategories, enterSorted, search])
     React.useEffect(()=>{
         setIsLoading(true)
-        Axios.get(`https://65db02b53ea883a15290ffe7.mockapi.io/items` +
-            ( enterCategories ? `?category=` + enterCategories + `&sortby=` + enterSorted : `?sortby=` + enterSorted )
-            ).then((obj)=>{
-            setPizzas(obj.data)
-            setIsLoading(false)
-        })
+        const fetchPizza = async () => {
+            try{
+                const {data} = await Axios.get(`https://65db02b53ea883a15290ffe7.mockapi.io/items` +
+                ( enterCategories ? `?category=` + enterCategories + `&sortby=` + enterSorted : `?sortby=` + enterSorted ))
+                setPizzas(data)
+                setIsLoading(false)
+            } catch (error){
+                navigate('NotFound')
+                alert('Произошла ошибка с загрузкой пицц!')
+                console.log(error) 
+            }
+        }
+        fetchPizza()
     }, [enterCategories, enterSorted, search])
   return (
     <>
@@ -72,3 +80,5 @@ export default function Home({addToCartTovar, setAddToCartTovar, buyCount, setBu
     </>
   )
 }
+
+export default Home
