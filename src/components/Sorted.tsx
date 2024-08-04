@@ -3,16 +3,20 @@ import { setSortId } from '../redux/slices/filterSlice'
 import { useSelector, useDispatch } from "react-redux"
 
 export default function Sorted(){
-    const enterSorted = useSelector(state=>state.filterSlice.sortId)
+    const enterSorted = useSelector((state:any)=>state.filterSlice.sortId)
     const [open, setOpen] = React.useState(false)
-    const list = [
+    type SortItem = {
+        name: string,
+        sortProperty: string
+    }
+    const list: SortItem[] = [
         {name: "популярности", sortProperty: "rating"},
         {name: "цене", sortProperty: "price"},
         {name: "алфавиту", sortProperty: "title"}
     ]
     const [categories, setCategories] = React.useState(list[0].name)
     const dispatch = useDispatch()
-    const useCategories  = (value) =>  {
+    const useCategories  = (value:SortItem) =>  {
         dispatch(setSortId(value.sortProperty))
         setCategories(value.name)
         setOpen(!open)

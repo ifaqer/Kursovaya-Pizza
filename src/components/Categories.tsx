@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId } from '../redux/slices/filterSlice'
 
 export default function Categories(){
-  const enterCategories = useSelector(state=>state.filterSlice.categoryId)
+  const enterCategories = useSelector((state:any)=>state.filterSlice.categoryId)
   const dispatch = useDispatch()
   const categories = [
     "Все",
