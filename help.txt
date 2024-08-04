@@ -13,3 +13,5 @@ useParams
 Outlet
 const navigate = useNavigate()
 ----------------
+Опциональная цепочка '?.'
+

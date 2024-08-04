@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import { plusItem, minusItem, removeItem, clearItems } from '../redux/slices/cartSlice' 
 const Cart = () => {
   const dispatch = useDispatch()
-  const {totalPrice, countItems, items} = useSelector(state=>state.cart)
+  const {totalPrice, countItems, items} = useSelector((state:any)=>state.cart)
   return (
     <div className="content">
         <div className="container container--cart">
@@ -29,7 +29,7 @@ const Cart = () => {
                 <span onClick={()=>dispatch(clearItems())}>Очистить корзину</span>
               </div>
             </div>
-            {items.map((item)=>(
+            {items.map((item:any)=>(
               <div className="content_items">
               <div className="cart__item">
                 <div className="cart__item-img">

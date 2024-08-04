@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import '../scss/app.scss'
 import Header from './Header'
 
-export default function MainStatic(){
+const MainStatic:React.FC = () => {
   return (
     <>
     <div className="wrapper">
@@ -17,3 +17,5 @@ export default function MainStatic(){
     </>
   )
 }
+
+export default MainStatic

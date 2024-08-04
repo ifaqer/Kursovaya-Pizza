@@ -2,7 +2,7 @@ import React from "react"
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategoryId } from '../redux/slices/filterSlice'
 
-export default function Categories(){
+const Categories:React.FC = () => {
   const enterCategories = useSelector((state:any)=>state.filterSlice.categoryId)
   const dispatch = useDispatch()
   const categories = [
@@ -28,3 +28,5 @@ export default function Categories(){
         </div>
     )
 }
+
+export default Categories

@@ -3,7 +3,7 @@ import ready from '../../assets/img/ready.png'
 import styles from "./Ready.module.scss"
 import { Link } from 'react-router-dom'
 
-export default function Ready(){
+const Ready:React.FC = () => {
   return (
     <div className={styles.root}>
         <img src={ready} className={styles.img} alt="Empty" />
@@ -13,3 +13,5 @@ export default function Ready(){
     </div>
   )
 }
+
+export default Ready

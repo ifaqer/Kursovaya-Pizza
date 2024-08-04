@@ -2,7 +2,7 @@ import React from "react"
 import { setSortId } from '../redux/slices/filterSlice'
 import { useSelector, useDispatch } from "react-redux"
 
-export default function Sorted(){
+const Sorted:React.FC = () => {
     const enterSorted = useSelector((state:any)=>state.filterSlice.sortId)
     const [open, setOpen] = React.useState(false)
     type SortItem = {
@@ -49,3 +49,5 @@ export default function Sorted(){
         </div>
     )
 }
+
+export default Sorted

@@ -11,16 +11,23 @@ import Categories from '../components/Categories'
 import PizzaBlock from '../components/PizzaBlock'
 import Skeleton from '../components/PizzaBlock/Skeleton'
 
-export const MyContext = React.createContext()
-
 function Home(){
-
-    const enterSorted = useSelector(state=>state.filterSlice.sortId)
-    const enterCategories = useSelector(state=>state.filterSlice.categoryId)
-    const search = useSelector(state=>state.filterSlice.search)
+    const enterSorted = useSelector((state:any)=>state.filterSlice.sortId)
+    const enterCategories = useSelector((state:any)=>state.filterSlice.categoryId)
+    const search = useSelector((state:any)=>state.filterSlice.search)
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [pizzas, setPizzas] = React.useState([])
+    type PizzasObjects = {
+        id: number,
+        imageUrl: string,
+        title: string,
+        types: number[],
+        sizes: number[],
+        price: number,
+        category: number,
+        rating: number
+    }
+    const [pizzas, setPizzas] = React.useState<PizzasObjects[]>([])
     const [isLoading, setIsLoading] = React.useState(true)
     const [firstRender, setFirstRender] = React.useState(false)
     React.useEffect(()=>{
@@ -71,7 +78,7 @@ function Home(){
     {
         isLoading ? [...new Array(8)].map((_, index)=><Skeleton key={index}/>) :
         (pizzas.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase())).map((obj, index)=>(
-        <PizzaBlock {...obj} obj={obj} key={index}/>
+        <PizzaBlock {...obj} key={index}/>
         )))
     }
     </div>

@@ -2,12 +2,21 @@ import React from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { addItem } from "../../redux/slices/cartSlice"
 
-export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, price}){
+type PizzaBlockProps = {
+    id: number,
+    imageUrl: string,
+    title: string,
+    types: number[],
+    sizes: number[],
+    price: number
+}
+
+const PizzaBlock:React.FC<PizzaBlockProps> = ({id, imageUrl, title, types, sizes, price}) => {
     const dispatch = useDispatch()
     const [activeType, setActiveType] = React.useState(0)
     const [activeSize, setActiveSize] = React.useState(0)
-    const findItem1 = useSelector(state=>state.cart.items.find(obj=>(obj.id == id && obj.type == activeType)))
-    const findItem2 = useSelector(state=>state.cart.items.find(obj=>(obj.id == id && obj.type != activeType)))
+    const findItem1 = useSelector((state:any)=>state.cart.items.find((obj:any)=>(obj.id == id && obj.type == activeType)))
+    const findItem2 = useSelector((state:any)=>state.cart.items.find((obj:any)=>(obj.id == id && obj.type != activeType)))
     const count = (findItem1 ? findItem1.count : 0)+(findItem2 ? findItem2.count : 0)
     const addToCart = ()=>{
         const newItem = {
@@ -70,3 +79,5 @@ export default function PizzaBlock({ obj, id, imageUrl, title, types, sizes, pri
         </div>
     )
 }
+
+export default PizzaBlock

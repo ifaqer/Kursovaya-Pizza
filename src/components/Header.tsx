@@ -1,9 +1,10 @@
+import React from "react"
 import logo from "/img/pizza-logo.svg"
 import {Link} from "react-router-dom"
 import { useSelector } from "react-redux"
 
-export default function Header(){
-    const {totalPrice, countItems} = useSelector(state=>state.cart)
+const Header:React.FC = () => {
+    const {totalPrice, countItems} = useSelector((state:any)=>state.cart)
     return(
         <div className="header">
         <div className="container">
@@ -58,3 +59,5 @@ export default function Header(){
       </div>
     )
 }
+
+export default Header
