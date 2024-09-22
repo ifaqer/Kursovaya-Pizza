@@ -1,4 +1,5 @@
-🍕 Второй ПОЛНОЦЕННЫЙ проект на React, на разработку которого + изучение технологий было потрачено +- 30 дней.
+#🍕 Второй ПОЛНОЦЕННЫЙ проект на React!
+На разработку и изучение технологий было потрачено около 30 дней.
 <h2>Чем я научился???</h2>
 <p>- Разрабатывать полноценное фронтенд-приложение на ReactJS.</p>
 <p>- Создавать компоненты, страницы, сортировку, поиск, пагинацию, фильтрацию, popup-окна и т.д.</p>
@@ -23,4 +24,7 @@
 <p>- React Pagination (пагинация)</p>
 <p>- Lodash.Debounce</p>
 <p>- Code Splitting, React Loadable, useWhyDidYouUpdate</p>
-<img href="https://github.com/ifaqer/React-Pizza-v2-REMASTERED/blob/main/1.png">
+<img src="1.png">
+<img src="2.png">
+<img src="3.png">
+<img src="4.png">
